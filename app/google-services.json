@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1019059030236",
+    "firebase_url": "https://nutrifacts-1bb64.firebaseio.com",
+    "project_id": "nutrifacts-1bb64",
+    "storage_bucket": "nutrifacts-1bb64.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1019059030236:android:44b16758a28ad535",
+        "android_client_info": {
+          "package_name": "io.paperplane.rajb.nutrifacts"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1019059030236-j7puh5sadrvso184cn4o66c1qs31l7m6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.paperplane.rajb.nutrifacts",
+            "certificate_hash": "5c67237f3973db97642068f82c3a92fa641a3e16"
+          }
+        },
+        {
+          "client_id": "1019059030236-k6r7pf0cmkdmoua4qtuems04ebf17eid.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZnurdV4nN8zt4YD-H9g4L6zaFuOkMVSw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1019059030236-k6r7pf0cmkdmoua4qtuems04ebf17eid.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
