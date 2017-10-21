@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements
             Toast.makeText(getApplicationContext(), "ay", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getApplicationContext(), "fuck", Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(this, HandwritingRecognizeActivity.class);
+            Intent i = new Intent(this, Graphing.class);
             startActivity(i);
         }
     }

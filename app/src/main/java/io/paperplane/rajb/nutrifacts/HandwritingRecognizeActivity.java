@@ -13,6 +13,7 @@ package io.paperplane.rajb.nutrifacts;
         import android.widget.Button;
         import android.widget.EditText;
         import android.widget.ImageView;
+        import android.widget.Toast;
 
         import com.google.gson.Gson;
         import com.microsoft.projectoxford.vision.VisionServiceClient;
@@ -30,6 +31,7 @@ package io.paperplane.rajb.nutrifacts;
         import java.io.ByteArrayOutputStream;
         import java.io.IOException;
         import java.lang.ref.WeakReference;
+        import java.util.ArrayList;
 
 public class HandwritingRecognizeActivity extends ActionBarActivity {
 
@@ -53,6 +55,14 @@ public class HandwritingRecognizeActivity extends ActionBarActivity {
     //max retry times to get operation result
     private int retryCountThreshold = 30;
 
+    private static int index = 0;
+
+    private static boolean isPrimed = false;
+    private static String[] keywords = new String[]{"calories", "fat", "sodium", "carbohydrate" , "protein", "sugars"};
+    private static int[] foodProperties = new int[keywords.length];
+
+    private static ArrayList<String> passedTypes = new ArrayList<String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +74,10 @@ public class HandwritingRecognizeActivity extends ActionBarActivity {
 
         buttonSelectImage = (Button) findViewById(R.id.buttonSelectImage);
         editText = (EditText) findViewById(R.id.editTextResult);
+    }
+
+    public static boolean isNumeric(String s) {
+        return s != null && s.matches("[-+]?\\d*\\.?\\d+");
     }
 
     @Override
@@ -86,6 +100,19 @@ public class HandwritingRecognizeActivity extends ActionBarActivity {
         }*/
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void switchIntents(){
+        Intent i = new Intent(this, Graphing.class);
+        startActivity(i);
+    }
+
+    private static boolean isKeyword(String s){
+        boolean ashwatcm = false;
+        for(String p: keywords){
+           if(p.equals(s)){ashwatcm=true;}
+        }
+        return ashwatcm;
     }
 
     // Called when the "Select Image" button is clicked.
@@ -176,7 +203,7 @@ public class HandwritingRecognizeActivity extends ActionBarActivity {
     }
 
 
-    private static class doRequest extends AsyncTask<String, String, String> {
+    private class doRequest extends AsyncTask<String, String, String> {
         // Store error message
         private Exception e = null;
 
@@ -185,6 +212,7 @@ public class HandwritingRecognizeActivity extends ActionBarActivity {
         public doRequest(HandwritingRecognizeActivity activity) {
             recognitionActivity = new WeakReference<HandwritingRecognizeActivity>(activity);
         }
+
 
         @Override
         protected String doInBackground(String... args) {
@@ -221,16 +249,30 @@ public class HandwritingRecognizeActivity extends ActionBarActivity {
                 } else {
                     for (HandwritingTextLine line : r.getRecognitionResult().getLines()) {
                         for (HandwritingTextWord word : line.getWords()) {
+
                             resultBuilder.append(word.getText() + " ");
+
                         }
                         resultBuilder.append("\n");
                     }
                     resultBuilder.append("\n");
                 }
 
-                recognitionActivity.get().editText.setText(resultBuilder);
+                /*Log.d("DEBUG", foodProperties[0]+"");
+                Log.d("DEBUG", foodProperties[1] + "");
+                Log.d("DEBUG", foodProperties[2]+"");
+                Log.d("DEBUG", foodProperties[3]+"");
+                Log.d("DEBUG", foodProperties[4] + "");*/
+
+
             }
             recognitionActivity.get().buttonSelectImage.setEnabled(true);
+            switchIntents();
+
         }
+
     }
+
+
+
 }
